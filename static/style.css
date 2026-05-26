@@ -169,8 +169,233 @@ button:hover { background: var(--btn-hover); }
 }
 
 
-@media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } .map-card { min-height: 380px; } }
+/* ===== TABLET (600px - 900px) ===== */
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
 
+    .map-card {
+        min-height: 380px;
+    }
+
+    .top-header {
+        padding: 16px 20px;
+    }
+
+    .brand-text h1 {
+        font-size: 1.2rem;
+    }
+
+    .weather-main h1 {
+        font-size: 2.8rem;
+    }
+
+    #info-content {
+        width: 95%;
+    }
+
+    .chart-card {
+        width: 95%;
+        height: 450px;
+    }
+}
+
+/* ===== MOBILE (max 600px) ===== */
+@media (max-width: 600px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .app-container {
+        margin-top: 10px;
+    }
+
+    /* Header */
+    .top-header {
+        padding: 14px 16px;
+        border-radius: 18px;
+        margin-bottom: 12px;
+    }
+
+    .brand-text h1 {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .brand-text p {
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
+    }
+
+    .logo {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+        border-radius: 12px;
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    /* Search bar */
+    .search-card {
+        flex-direction: column;
+        gap: 10px;
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    input[type="text"] {
+        font-size: 0.85rem;
+        padding: 10px 14px;
+    }
+
+    button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+
+    .geo-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Weather card */
+    .glass-card {
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .weather-card {
+        padding: 16px;
+    }
+
+    .weather-main h1 {
+        font-size: 2.4rem;
+    }
+
+    .weather-main img {
+        width: 70px;
+        height: 70px;
+    }
+
+    /* Widget grid — 2 columns on mobile */
+    .widgets-subgrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .widget-tile {
+        padding: 10px;
+        border-radius: 12px;
+        gap: 7px;
+    }
+
+    .widget-tile small {
+        font-size: 0.65rem;
+    }
+
+    .widget-tile h5 {
+        font-size: 0.78rem;
+    }
+
+    .tile-icon {
+        font-size: 1.1rem;
+    }
+
+    /* Map */
+    .map-card {
+        min-height: 280px;
+        border-radius: 18px;
+    }
+
+    /* Trend chart popup */
+    .chart-card {
+        width: 96%;
+        height: 380px;
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .chart-card h3 {
+        font-size: 0.9rem;
+    }
+
+    /* Info popups */
+    #info-content {
+        width: 96%;
+        padding: 16px;
+        border-radius: 18px;
+        max-height: 90vh;
+    }
+
+    #info-body {
+        gap: 8px;
+    }
+
+    /* Action button */
+    .action-btn {
+        font-size: 0.85rem;
+        padding: 10px 16px;
+        border-radius: 12px;
+    }
+
+    /* Theme toggle text — hide on very small screens */
+    #theme-text {
+        display: none;
+    }
+
+    /* Prompt card */
+    .prompt-card {
+        padding: 30px 16px;
+    }
+
+    .prompt-card h3 {
+        font-size: 1rem;
+    }
+
+    .prompt-card p {
+        font-size: 0.85rem;
+    }
+
+    /* Suggestions dropdown */
+    #suggestions-box {
+        border-radius: 12px;
+    }
+
+    .suggestion-item {
+        padding: 10px 14px;
+        font-size: 0.82rem;
+    }
+}
+
+/* ===== VERY SMALL PHONES (max 380px) ===== */
+@media (max-width: 380px) {
+
+    .weather-main h1 {
+        font-size: 2rem;
+    }
+
+    .brand-text h1 {
+        font-size: 0.9rem;
+    }
+
+    .widgets-subgrid {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .widget-tile h5 {
+        font-size: 0.72rem;
+    }
+}
 
 #theme-text {
     font-weight: 600;
