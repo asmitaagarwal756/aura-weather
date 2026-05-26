@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraWeather Pro - Command Console</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='100%25' stop-color='%2338bdf8'/></linearGradient></defs><circle cx='50' cy='50' r='50' fill='url(%23g)'/><text y='.9em' x='50%25' text-anchor='middle' font-size='60' font-family='Arial' fill='white'>🌤</text></svg>">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <header class="top-header glass-card">
+            <div class="brand">
+                <div class="logo">
+                    <span class="logo-glow">🌤</span>
+                </div>
+                <div class="brand-text">
+                    <h1>AURA <span class="brand-highlight">WEATHER</span></h1>
+                    <p>Atmospheric Intelligence System</p>
+                </div>
+            </div>
+            <div class="theme-toggle-container">
+                <label class="switch">
+                    <input type="checkbox" id="theme-slider" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span id="theme-text">☀️ Light Mode</span>
+            </div>
+        </header>
+
+        <!-- Control Header Search Row -->
+        <header class="glass-card search-card">
+            <div class="search-bar">
+                <input type="text" id="city-input" placeholder="Search for a city location..." autocomplete="off">
+                <button id="search-btn">Search</button>
+            </div>
+            <button id="geo-btn" class="geo-btn">📍 Use Current Location</button>
+        </header>
+        <div id="suggestions-box"></div>
+
+        <!-- Dynamic Location Prompt Alert Block -->
+        <div id="prompt-card" class="glass-card prompt-card">
+            <h3>🌍 Verification Awaiting Telemetry Input</h3>
+            <p>Grant permission to the browser geo-prompt block or enter a city name into the lookup bar.</p>
+        </div>
+
+        <!-- 35/65 Proportional Asymmetric Main Command Grid View Container -->
+        <main id="main-dashboard" class="dashboard-grid hidden">
+            
+            <!-- Left Data Summaries Panel Track (35% Scale Factor) -->
+            <div class="left-panel-column">
+                <section class="glass-card weather-card">
+                    <h2 id="location-name">--</h2>
+                    <p id="weather-desc" class="subtext">--</p>
+                    <div class="weather-main">
+                        <img id="weather-icon" src="" alt="Condition Asset">
+                        <h1 id="current-temp">--°C</h1>
+                    </div>
+                    <div id="weather-message" class="weather-message">
+                    </div>
+                    
+                    <!-- Advanced Macro-Widgets Subgrid Matrix -->
+                    <div class="widgets-subgrid">
+                        <div class="widget-tile clickable" id="wind-dir-card">
+                            <span class="tile-icon">🧭</span>
+                            <div>
+                                <small>Wind Bearing</small>
+                                <h5 id="wind-dir-val">--</h5>
+                            </div>
+                        </div>
+                        <div class="widget-tile clickable" id="precipitation-card">
+                            <span class="tile-icon">🌧️</span>
+                            <div>
+                                <small>Precipitation</small>
+                                <h5 id="precipitation-val">0.00 mm</h5>
+                            </div>
+                        </div>
+                        <div class="widget-tile clickable" id="humidity-card">
+                            <span class="tile-icon">💧</span>
+                            <div>
+                                <small>Humidity Ratio</small>
+                                <h5 id="humidity-val">--%</h5>
+                            </div>
+                        </div>
+                        <div class="widget-tile clickable" id="feels-like-card">
+                            <span class="tile-icon">🌡️</span>
+                            <div>
+                                <small>Feels Like</small>
+                                <h5 id="feels-like-val">--°C</h5>
+                            </div>
+                        </div>
+                        <div class="widget-tile clickable" id="aqi-card">
+                            <span class="tile-icon">🌬️</span>
+                            <div>
+                                <small>Air Quality Index</small>
+                                <h5 id="aqi-val">--</h5>
+                            </div>
+                        </div>
+                        <div class="widget-tile clickable" id="wind-speed-card">
+                            <span class="tile-icon">💨</span>
+                            <div>
+                                <small>Wind Speed</small>
+                                <h5 id="wind-speed-val">-- km/h</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="toggle-chart-btn" class="action-btn">📊 View 5-Day Trend Chart</button>
+                </section>
+            </div>
+
+            <!-- Right Dynamic Full-Width Stretch Leaflet Panel-->
+            <div class="right-panel-column">
+                <section class="glass-card map-card">
+                    <div id="map"></div>
+                </section>
+            </div>
+
+        </main>
+        <div id="chart-overlay" class="chart-overlay"></div>
+
+        <!-- Animated Trend Chart Carousel Drawer Node -->
+            <section id="chart-section" class="glass-card chart-card">
+                <button id="close-chart" class="close-btn">✖</button>
+                <h3>📈 5-Day Extended Weather Forecast Analytics</h3>
+                <div class="chart-container">
+                    <canvas id="forecastChart"></canvas>
+                </div>
+            </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    <div id="info-popup" class="info-overlay">
+    <div class="glass-card " id="info-content">
+        <button id="close-info" class="close-btn">✖</button>
+        <h3 id="info-title">Info</h3>
+        <div id="info-body"></div>
+    </div>
+</div>
+</body>
+</html>
