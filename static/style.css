@@ -205,76 +205,141 @@ button:hover { background: var(--btn-hover); }
 @media (max-width: 600px) {
 
     body {
-        padding: 12px;
+        padding: 10px;
     }
 
     .app-container {
-        margin-top: 10px;
+        margin-top: 8px;
     }
 
-    /* Header */
+    /* Header fix — keep everything on one row */
     .top-header {
-        padding: 14px 16px;
-        border-radius: 18px;
-        margin-bottom: 12px;
-    }
-
-    .brand-text h1 {
-        font-size: 1rem;
-        letter-spacing: 1px;
-    }
-
-    .brand-text p {
-        font-size: 0.65rem;
-        letter-spacing: 0.5px;
-    }
-
-    .logo {
-        width: 38px;
-        height: 38px;
-        font-size: 18px;
-        border-radius: 12px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        margin-bottom: 10px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
     }
 
     .brand {
         gap: 10px;
+        flex: 1;
+        min-width: 0;        /* 👈 prevents overflow */
     }
 
-    /* Search bar */
+    /* Fix logo — force circle not oval */
+    .logo {
+        width: 40px;
+        height: 40px;       /* 👈 equal width and height = circle */
+        min-width: 40px;    /* 👈 prevents squishing */
+        min-height: 40px;
+        border-radius: 12px;
+        font-size: 20px;
+    }
+
+    .logo-glow {
+        font-size: 20px;
+        line-height: 1;
+    }
+
+    /* Brand text — keep on one line */
+    .brand-text {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .brand-text h1 {
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+        white-space: nowrap;     /* 👈 no wrapping */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .brand-text p {
+        font-size: 0.6rem;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Theme toggle — keep compact */
+    .theme-toggle-container {
+        padding: 6px 10px;
+        gap: 6px;
+        flex-shrink: 0;     /* 👈 don't let it shrink */
+    }
+
+    #theme-text {
+        display: none;      /* 👈 hide text label on mobile */
+    }
+
+    /* Search card */
     .search-card {
         flex-direction: column;
-        gap: 10px;
-        padding: 16px;
-        border-radius: 18px;
+        gap: 8px;
+        padding: 14px;
+        border-radius: 16px;
+        margin-bottom: 10px;
     }
 
     .search-bar {
         width: 100%;
+        gap: 8px;
     }
 
     input[type="text"] {
         font-size: 0.85rem;
         padding: 10px 14px;
+        border-radius: 12px;
     }
 
-    button {
-        padding: 10px 16px;
+    #search-btn {
+        padding: 10px 18px;
         font-size: 0.85rem;
+        border-radius: 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
     .geo-btn {
         width: 100%;
         text-align: center;
+        padding: 10px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+    }
+
+    /* Prompt card */
+    .prompt-card {
+        padding: 30px 16px;
+        border-radius: 16px;
+        text-align: center;
+    }
+
+    .prompt-card h3 {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+
+    .prompt-card p {
+        font-size: 0.82rem;
+        line-height: 1.5;
+    }
+
+    /* Dashboard grid */
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     /* Weather card */
-    .glass-card {
-        padding: 16px;
-        border-radius: 18px;
-    }
-
     .weather-card {
         padding: 16px;
+        border-radius: 16px;
     }
 
     .weather-main h1 {
@@ -282,14 +347,15 @@ button:hover { background: var(--btn-hover); }
     }
 
     .weather-main img {
-        width: 70px;
-        height: 70px;
+        width: 65px;
+        height: 65px;
     }
 
-    /* Widget grid — 2 columns on mobile */
+    /* Widget grid */
     .widgets-subgrid {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
+        margin: 10px 0;
     }
 
     .widget-tile {
@@ -307,33 +373,33 @@ button:hover { background: var(--btn-hover); }
     }
 
     .tile-icon {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     /* Map */
     .map-card {
-        min-height: 280px;
-        border-radius: 18px;
+        min-height: 260px;
+        border-radius: 16px;
     }
 
-    /* Trend chart popup */
+    /* Chart popup */
     .chart-card {
         width: 96%;
-        height: 380px;
-        padding: 16px;
-        border-radius: 18px;
+        height: 360px;
+        padding: 14px;
+        border-radius: 16px;
     }
 
     .chart-card h3 {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     /* Info popups */
     #info-content {
         width: 96%;
-        padding: 16px;
-        border-radius: 18px;
-        max-height: 90vh;
+        padding: 14px;
+        border-radius: 16px;
+        max-height: 88vh;
     }
 
     #info-body {
@@ -342,58 +408,39 @@ button:hover { background: var(--btn-hover); }
 
     /* Action button */
     .action-btn {
-        font-size: 0.85rem;
-        padding: 10px 16px;
+        font-size: 0.82rem;
+        padding: 10px 14px;
         border-radius: 12px;
+        margin-top: 10px;
     }
 
-    /* Theme toggle text — hide on very small screens */
-    #theme-text {
-        display: none;
-    }
-
-    /* Prompt card */
-    .prompt-card {
-        padding: 30px 16px;
-    }
-
-    .prompt-card h3 {
-        font-size: 1rem;
-    }
-
-    .prompt-card p {
-        font-size: 0.85rem;
-    }
-
-    /* Suggestions dropdown */
-    #suggestions-box {
-        border-radius: 12px;
-    }
-
+    /* Suggestions */
     .suggestion-item {
         padding: 10px 14px;
         font-size: 0.82rem;
     }
 }
 
-/* ===== VERY SMALL PHONES (max 380px) ===== */
+/* ===== VERY SMALL (max 380px) ===== */
 @media (max-width: 380px) {
+
+    .brand-text h1 {
+        font-size: 0.82rem;
+    }
+
+    .logo {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        font-size: 16px;
+    }
 
     .weather-main h1 {
         font-size: 2rem;
     }
 
-    .brand-text h1 {
-        font-size: 0.9rem;
-    }
-
-    .widgets-subgrid {
-        grid-template-columns: 1fr 1fr;
-        gap: 6px;
-    }
-
     .widget-tile h5 {
-        font-size: 0.72rem;
+        font-size: 0.7rem;
     }
 }
 
