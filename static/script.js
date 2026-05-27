@@ -86,7 +86,7 @@ async function loadDashboardData(lat, lon) {
 }
 
 function updateWeatherDOM(data) {
-    document.getElementById("location-name").innerText = `📍 ${data.city}`;
+    document.getElementById("location-name").innerText = `${data.city}`;
     document.getElementById("weather-desc").innerText = data.description;
     document.getElementById("current-temp").innerText = `${data.temp}°C`;
     document.getElementById("humidity-val").innerText = `${data.humidity}%`;
